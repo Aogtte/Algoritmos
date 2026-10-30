@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de productos</title>
+    <link rel="stylesheet" href="{% static 'productos/estilos.css' %}">
+</head>
+<body>
+
+    <main class="contenedor contenedor-formulario">
+        <header class="encabezado encabezado-formulario">
+            <div>
+                <p class="etiqueta">Gestión de inventario</p>
+                <h1>
+                    {% if producto %}
+                        Editar producto
+                    {% else %}
+                        Registrar producto
+                    {% endif %}
+                </h1>
+            </div>
+        </header>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form class="formulario" method="POST">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="nombre">Nombre del producto</label>
+                <input
+                    id="nombre"
+                    type="text"
+                    name="nombre"
+                    maxlength="100"
+                    value="{{ producto.nombre|default:'' }}"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="precio">Precio</label>
+                <input
+                    id="precio"
+                    type="number"
+                    name="precio"
+                    min="0"
+                    step="0.01"
+                    value="{{ producto.precio|default:'' }}"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="cantidad">Cantidad disponible</label>
+                <input
+                    id="cantidad"
+                    type="number"
+                    name="cantidad"
+                    min="0"
+                    step="1"
+                    value="{{ producto.cantidad|default:'' }}"
+                    required
+                >
+            </div>
+
+            <div class="acciones acciones-formulario">
+                <button class="boton" type="submit">Guardar producto</button>
+                <a class="enlace-volver" href="{% url 'productos:listar' %}">
+                    Volver al inventario
+                </a>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>

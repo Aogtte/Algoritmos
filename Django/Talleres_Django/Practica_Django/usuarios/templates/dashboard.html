@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/bootstrap.bundle.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --border-color: #e5e5e5;
+            --accent-color: #000000;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 780px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .sub-header {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .btn-custom {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            opacity: 0.85;
+            color: #ffffff;
+        }
+
+        /* Estilos interactivos para las Cards */
+        .dashboard-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            height: 100%;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-color: #b5b5b5;
+            color: inherit;
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .dashboard-card p {
+            color: var(--text-muted);
+            font-size: 0.925rem;
+            margin: 0;
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+            margin-top: 18px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--accent-color);
+        }
+
+        .card-action span {
+            transition: transform 0.2s ease;
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .dashboard-card:hover .card-action span {
+            transform: translateX(4px);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Agregar imagenes a las cards -->
+
+    <div class="header">
+        <h1>¡Bienvenido {{ request.user.username }}!</h1>
+        <a href="/usuarios/logout/" class="btn-custom">Cerrar Sesión</a>
+    </div>
+
+    <h5>Seleccione el sistema que desee utilizar:</h5><br>
+
+    <div class="row g-4">
+    <!-- Card 1: Productos -->
+    <div class="col-md-6">
+        <a href="/productos/" class="dashboard-card">
+            <h3>Administrar Productos</h3>
+            <p>Gestione el inventario y los productos.</p>
+            <img src="{% static 'img/dashboard_productos.jpg' %}" alt="Icono de Productos" class="card-img" margin="30px">
+        </a>
+    </div>
+
+    <!-- Card 2: Pedidos -->
+    <div class="col-md-6">
+        <a href="/pedidos/" class="dashboard-card">
+            <h3>Administrar Pedidos</h3>
+            <p>Consulte y gestione las órdenes recibidas.</p>
+            <img src="{% static 'img/dashboard_pedidos.jpg' %}" alt="Icono de Pedidos" class="card-img">
+        </a>
+    </div>
+
+</body>
+</html>
